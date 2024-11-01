@@ -7,12 +7,8 @@ MPS::MPS(int n) {
   adj = new int[size];
   dp_table = new int*[size];
   for(int i = 0; i < size; i++){
-    dp_table[i] = new int[i];
-  }
-  for(int i = 0; i < size; i++){
-    for(int j = 0; j < size; j++){
-      dp_table[i][j] = -1;
-    } 
+    dp_table[i] = new int[i + 1];
+    for(int j = 0; j < i; j++) dp_table[i][j] = -1;
   }
 }
 
@@ -23,24 +19,24 @@ void MPS::add(int a, int b) {
 
 int MPS::calc(int i, int j){
   if(i >= j) return 0;
-  if(dp_table[i][j] != -1) return dp_table[i][j];
+  if(dp_table[j][i] != -1) return dp_table[j][i];
   if(i == j){
-    dp_table[i][j] = 0;
-    return dp_table[i][j];
+    dp_table[j][i] = 0;
+    return dp_table[j][i];
   }
   int connected_point = adj[j];
   if(connected_point > j || connected_point < i){
-    dp_table[i][j] = calc(i, j - 1);
-    return dp_table[i][j];
+    dp_table[j][i] = calc(i, j - 1);
+    return dp_table[j][i];
   }
   else{
     if(connected_point == i){
-      dp_table[i][j] = calc(i + 1, j - 1) + 1;
-      return dp_table[i][j];
+      dp_table[j][i] = calc(i + 1, j - 1) + 1;
+      return dp_table[j][i];
     }
     else{
-      dp_table[i][j] = std::max(calc(i, j - 1), calc(i, connected_point - 1) + calc(connected_point + 1, j) + 1);
-      return dp_table[i][j];
+      dp_table[j][i] = std::max(calc(i, j - 1), calc(i, connected_point - 1) + calc(connected_point + 1, j) + 1);
+      return dp_table[j][i];
     }
   }
 }
@@ -61,7 +57,7 @@ void MPS::find_prt(int i, int j){
       find_prt(i + 1, j - 1);
     }
     else{
-      if(dp_table[i][j] == dp_table[i][j - 1]){
+      if(dp_table[j][i] == dp_table[j -  1][i]){
         find_prt(i, j - 1);
       }
       else{
