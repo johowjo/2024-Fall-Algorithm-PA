@@ -7,7 +7,8 @@ class MPS {
 public:
   int size;
   int *adj;
-  int **dp_table;
+  unsigned short **dp_table_1;
+  int **dp_table_2;
   std::vector<int> answer;
 
   void add(int i, int j);
