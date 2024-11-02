@@ -9,12 +9,12 @@ ARFLAGS = rcv
 DBGFLAGS = -g -D_DEBUG_ON_
 OPTFLAGS = -O2
 
-all	: bin/MPS
+all	: bin/mps
 	@echo -n ""
 
 # optimized version
-bin/MPS : mps.o main.o lib
-			$(CC) $(OPTFLAGS) mps.o main.o -ltm_usage -Llib -o bin/MPS
+bin/mps : mps.o main.o lib
+			$(CC) $(OPTFLAGS) mps.o main.o -ltm_usage -Llib -o bin/mps
 main.o 	   	: src/main.cpp lib/tm_usage.h
 			$(CC) $(CFLAGS) $< -Ilib -o $@
 mps.o	: src/mps.cpp src/mps.h

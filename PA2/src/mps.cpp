@@ -160,12 +160,9 @@ void MPS::print(std::fstream &fout){
   int ans = run_dp();
   // std::cout << "finish run_dp()" << std::endl;
   find_prt(0, size - 1);
-  std::cout << ans << std::endl;
-  std::cout << answer.size() << std::endl;
   fout << ans << std::endl;
   sort(answer.begin(), answer.end());
   for(int i = 0; i < answer.size(); i++){
-    std::cout << answer[i] << ' ' << adj[answer[i]] << std::endl;
     fout << answer[i] << ' ' << adj[answer[i]] << std::endl;
   }
 }
