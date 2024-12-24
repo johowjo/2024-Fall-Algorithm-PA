@@ -1,0 +1,7 @@
+Before compiling, it is recommended to run the following command:
+make clean
+The program can be compiled with the following command:
+make
+After compiling, it can be executed with the following command:
+./bin/cb inputs/<input_file_name> outputs/<output_file_name>
+Note that these commands must be run at the root of the directory.
